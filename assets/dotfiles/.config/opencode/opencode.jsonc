@@ -1,36 +1,34 @@
 {
   "$schema": "https://opencode.ai/config.json",
-
-  "plugin": [
-    "opencode-antigravity-auth@latest"
-  ],
-
+  "plugin": [],
+  "model": "zai-coding-plan/glm-5.3",
   "mcp": {
     "context7": {
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
       "enabled": true
     },
-    "gsd": {
+    "code-index": {
       "type": "local",
       "command": [
-        "npx",
-        "-y",
-        "-p",
-        "@opengsd/gsd-core",
-        "gsd-mcp-server"
+        "/bin/sh",
+        "-c",
+        "root=$(git rev-parse --show-toplevel 2>/dev/null || true); if [ -n \"$root\" ]; then set -- --project-path \"$root\"; fi; exec \"$HOME/.local/bin/code-index-mcp\" \"$@\" --indexer-path \"$HOME/.cache/code-index-mcp\""
       ],
-      "enabled": true
+      "enabled": true,
+      "timeout": 1200000
     }
   },
-
-  "permission": {
-    "read": {
-      "~/.config/opencode/gsd-core/*": "allow"
-    },
-    "external_directory": {
-      "~/.config/opencode/gsd-core/*": "allow"
+  "agent": {
+    "plan": {
+      "model": "zai-coding-plan/glm-5.3-highspeed",
+      "reasoningEffort": "max"
     }
-  }
+  },
+  "skills": {
+    "paths": [
+      "$HOME/.opencode/skills"
+    ]
+  },
+  "permission": "allow"
 }
-

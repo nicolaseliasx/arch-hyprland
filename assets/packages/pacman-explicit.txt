@@ -14,7 +14,10 @@ brightnessctl
 btop
 cava
 chntpw
+chromium
+clang
 cliphist
+cloudflared
 dbeaver
 ddcutil
 discord
@@ -23,8 +26,8 @@ docker
 docker-compose
 earlyoom
 efibootmgr
-eza
 ethtool
+eza
 fastfetch
 ffmpegthumbnailer
 firefox
@@ -50,6 +53,7 @@ inxi
 jq
 kitty
 kvantum
+less
 libnewt
 libpulse
 libspng
@@ -95,6 +99,7 @@ qt6-5compat
 qt6ct
 quickshell
 rofi
+rsync
 sassc
 sbctl
 slurp
@@ -127,6 +132,7 @@ usbutils
 uv
 uwsm
 vala
+waybar
 wf-recorder
 wget
 wireplumber
@@ -137,7 +143,6 @@ xdg-user-dirs
 yad
 yarn
 yt-dlp
-zed
 zip
 zoxide
 zram-generator

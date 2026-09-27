@@ -2,7 +2,7 @@
 # /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Script for Random Wallpaper ( CTRL ALT W)
 
-wallDIR="$HOME/pictures/wallpapers"
+wallDIR="$HOME/Pictures/wallpapers"
 SCRIPTSDIR="$HOME/.config/hypr/scripts"
 
 focused_monitor=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')
@@ -45,12 +45,8 @@ ensure_wallpaper_daemon() {
   return 1
 }
 
-mapfile -d '' -t PICS < <(find -L "$wallDIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.pnm" -o -iname "*.tga" -o -iname "*.tiff" -o -iname "*.webp" -o -iname "*.bmp" -o -iname "*.farbfeld" -o -iname "*.gif" \) -print0)
-if ((${#PICS[@]} == 0)); then
-  notify-send "Wallpaper directory is empty" "$wallDIR"
-  exit 1
-fi
-RANDOMPICS="${PICS[RANDOM % ${#PICS[@]}]}"
+PICS=($(find -L ${wallDIR} -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.pnm" -o -name "*.tga" -o -name "*.tiff" -o -name "*.webp" -o -name "*.bmp" -o -name "*.farbfeld" -o -name "*.gif" \)))
+RANDOMPICS=${PICS[ $RANDOM % ${#PICS[@]} ]}
 
 
 # Transition config
@@ -63,6 +59,10 @@ SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration
 
 ensure_wallpaper_daemon || exit 1
 "$WALLPAPER_BIN" img -o "$focused_monitor" "${RANDOMPICS}" $SWWW_PARAMS
-"$SCRIPTSDIR/WallustSwww.sh" "$RANDOMPICS"
+
+wait $!
+"$SCRIPTSDIR/WallustSwww.sh" "$RANDOMPICS" &&
+
+wait $!
 sleep 2
 "$SCRIPTSDIR/Refresh.sh"

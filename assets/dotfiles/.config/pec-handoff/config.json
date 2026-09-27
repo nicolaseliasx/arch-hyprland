@@ -1,0 +1,9 @@
+{
+  "role": "pc",
+  "repository": "$HOME/projects/bridge/pec",
+  "mailbox": "/home/admin/.local/state/pec-machine-handoff",
+  "worktrees": "$HOME/projects/bridge/pec-handoffs",
+  "local_state": "$HOME/.local/state/pec-machine-handoff",
+  "server_ssh": "admin@192.168.15.40",
+  "server_cli": "/home/admin/.local/bin/pec-handoff"
+}

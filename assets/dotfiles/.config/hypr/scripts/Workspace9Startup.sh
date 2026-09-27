@@ -22,8 +22,8 @@ wait_for_window() {
 hyprctl dispatch workspace "$workspace"
 sleep 0.2
 
-spotify >/dev/null 2>&1 &
-wait_for_window '[Ss]potify|spotify' || true
+fastpotify >/dev/null 2>&1 &
+wait_for_window '[Ff]astpotify' || true
 sleep 0.2
 
 hyprctl dispatch layoutmsg preselect d

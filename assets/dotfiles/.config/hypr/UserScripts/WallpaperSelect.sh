@@ -244,11 +244,10 @@ apply_image_wallpaper() {
 
   "$WALLPAPER_BIN" img -o "$focused_monitor" "$image_path" $SWWW_PARAMS
 
-  # Keep the selectors and the generated Wallust theme in sync.
-  ln -sfn "$image_path" "$rofi_current_wallpaper"
+  # Keep helper files in sync without recalculating wallust colors.
+  ln -sf "$image_path" "$rofi_current_wallpaper" || true
   mkdir -p "$(dirname "$wallpaper_current")"
-  cp -f "$image_path" "$wallpaper_current"
-  "$SCRIPTSDIR/WallustSwww.sh" "$image_path"
+  cp -f "$image_path" "$wallpaper_current" || true
 
   sleep 2
   "$SCRIPTSDIR/Refresh.sh"

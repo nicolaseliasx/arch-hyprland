@@ -1,0 +1,12 @@
+[Unit]
+Description=Run EDIFIER connection once after graphical session starts
+PartOf=graphical-session.target
+
+[Timer]
+OnActiveSec=2s
+AccuracySec=1s
+Unit=edifier-autoconnect.service
+RemainAfterElapse=yes
+
+[Install]
+WantedBy=graphical-session.target

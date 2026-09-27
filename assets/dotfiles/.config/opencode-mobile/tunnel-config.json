@@ -1,0 +1,5 @@
+{
+  "provider": "cloudflare",
+  "mode": "free",
+  "cloudflaredPath": "/usr/bin/cloudflared"
+}

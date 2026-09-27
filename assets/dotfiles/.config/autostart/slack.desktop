@@ -1,5 +1,9 @@
 [Desktop Entry]
 Type=Application
 Name=Slack
-Exec=$HOME/.config/hypr/scripts/slack-work-hours.sh
-X-GNOME-Autostart-enabled=true
+Comment=Start Slack when you sign in
+Exec=/usr/bin/slack --disable-gpu-compositing --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --enable-features=WebRTCPipeWireCapturer --enable-features=WaylandWindowDecorations --disable-features=WaylandFractionalScaleV1 -s
+Icon=slack
+StartupWMClass=Slack
+StartupNotify=true
+Categories=GNOME;GTK;Network;InstantMessaging;

@@ -8,10 +8,25 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "diff_view_style": "unified",
+
   "cli_default_open_behavior": "new_window",
+
+  // Faz o Ctrl+P encontrar arquivos ignorados pelo Git
+  "file_finder": {
+    "include_ignored": true,
+    "modal_max_width": "large"
+  },
+
+  // Garante que as migrations em database sejam indexadas
+  "file_scan_inclusions": [
+    ".env*",
+    "database/**"
+  ],
+
   "project_panel": {
     "dock": "left"
   },
+
   "git_panel": {
     "button": true,
     "dock": "left",
@@ -21,100 +36,140 @@
     "group_by": "status",
     "starts_open": true
   },
+
   "vim_mode": false,
+
   "icon_theme": {
     "mode": "dark",
     "light": "Zed (Default)",
     "dark": "Zed (Default)"
   },
+
   "telemetry": {
     "diagnostics": false,
     "metrics": false,
     "anthropic_retention": false
   },
+
   "session": {
     "trust_all_worktrees": true
   },
+
   "terminal": {
     "shell": {
       "program": "/usr/bin/zsh"
     }
   },
+
   "languages": {
     "JavaScript": {
       "formatter": {
         "external": {
           "command": "./frontend/node_modules/.bin/prettier",
-          "arguments": ["--stdin-filepath", "{buffer_path}"]
+          "arguments": [
+            "--stdin-filepath",
+            "{buffer_path}"
+          ]
         }
       },
       "format_on_save": "on"
     },
+
     "JSX": {
       "formatter": {
         "external": {
           "command": "./frontend/node_modules/.bin/prettier",
-          "arguments": ["--stdin-filepath", "{buffer_path}"]
+          "arguments": [
+            "--stdin-filepath",
+            "{buffer_path}"
+          ]
         }
       },
       "format_on_save": "on"
     },
+
     "TypeScript": {
       "formatter": {
         "external": {
           "command": "./frontend/node_modules/.bin/prettier",
-          "arguments": ["--stdin-filepath", "{buffer_path}"]
+          "arguments": [
+            "--stdin-filepath",
+            "{buffer_path}"
+          ]
         }
       },
       "format_on_save": "on"
     },
+
     "TSX": {
       "formatter": {
         "external": {
           "command": "./frontend/node_modules/.bin/prettier",
-          "arguments": ["--stdin-filepath", "{buffer_path}"]
+          "arguments": [
+            "--stdin-filepath",
+            "{buffer_path}"
+          ]
         }
       },
       "format_on_save": "on"
     },
+
     "CSS": {
       "formatter": {
         "external": {
           "command": "./frontend/node_modules/.bin/prettier",
-          "arguments": ["--stdin-filepath", "{buffer_path}"]
+          "arguments": [
+            "--stdin-filepath",
+            "{buffer_path}"
+          ]
         }
       },
       "format_on_save": "on"
     },
+
     "GraphQL": {
       "formatter": {
         "external": {
           "command": "./frontend/node_modules/.bin/prettier",
-          "arguments": ["--stdin-filepath", "{buffer_path}"]
+          "arguments": [
+            "--stdin-filepath",
+            "{buffer_path}"
+          ]
         }
       },
       "format_on_save": "on"
     },
+
     "Java": {
       "formatter": {
         "external": {
           "command": "$HOME/.local/bin/zed-intellij-format",
-          "arguments": ["{buffer_path}"]
+          "arguments": [
+            "{buffer_path}"
+          ]
         }
       },
       "format_on_save": "on"
     },
+
     "Kotlin": {
-      "language_servers": ["kotlin-language-server", "!kotlin-lsp", "..."],
+      "language_servers": [
+        "kotlin-language-server",
+        "!kotlin-lsp",
+        "..."
+      ],
       "formatter": {
         "external": {
           "command": "$HOME/.local/bin/zed-intellij-format",
-          "arguments": ["{buffer_path}"]
+          "arguments": [
+            "{buffer_path}"
+          ]
         }
       },
       "format_on_save": "on"
     }
   },
+
   "lsp": {
     "jdtls": {
       "settings": {
@@ -122,21 +177,27 @@
       }
     }
   },
+
   "base_keymap": "VSCode",
+
   "minimap": {
     "show": "always"
   },
+
   "buffer_font_family": "Consolas",
+
   "agent_servers": {
     "codex-acp": {
       "type": "registry"
     }
   },
+
   "ui_font_size": 16,
   "buffer_font_size": 16.0,
+
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "VSCode Dark Modern",
-  },
+    "dark": "VSCode Dark Modern"
+  }
 }

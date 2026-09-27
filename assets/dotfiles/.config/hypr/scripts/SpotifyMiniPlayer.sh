@@ -13,7 +13,7 @@ from pathlib import Path
 STATE_DIR = Path.home() / ".cache" / "hypr"
 STATE_FILE = STATE_DIR / "spotify-mode"
 LOG_FILE = STATE_DIR / "spotify-miniplayer.log"
-SPOTIFY_CLASSES = {"spotify", "Spotify"}
+SPOTIFY_CLASSES = {"fastpotify"}
 DEFAULT_WORKSPACE = "9"
 MINI_MARGIN_X = 24
 MINI_MARGIN_Y = 24
@@ -127,7 +127,7 @@ def get_monitor(name: str) -> dict[str, object] | None:
 
 def launch_spotify() -> None:
     subprocess.Popen(
-        ["spotify"],
+        ["fastpotify"],
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
         start_new_session=True,

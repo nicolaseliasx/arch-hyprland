@@ -1,2 +1,1 @@
--- Workspaces intentionally are not pinned to connector names. This keeps the
--- profile usable on laptops, desktops and docking stations.
+-- Workspaces intentionally are not pinned to connector names.

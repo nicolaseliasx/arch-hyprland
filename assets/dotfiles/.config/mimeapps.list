@@ -16,6 +16,8 @@ application/x-extension-xht=firefox.desktop
 x-scheme-handler/anytype=anytype.desktop
 x-scheme-handler/slack=slack.desktop
 x-scheme-handler/codex=chatgpt.desktop
+x-scheme-handler/spotify=fastpotify.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox.desktop;

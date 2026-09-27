@@ -1,15 +1,12 @@
-# This inventory is retained for snapshots and human reference.  The installer
-# uses aur-required.txt and aur-optional.txt so an application failure cannot
-# block the desktop profile.
-wallust
 anytype-bin
 downgrade
+fastpotify-bin
 gtk-engine-murrine
 openai-chatgpt
 qt5-webengine
 slack-desktop-wayland
-spotify
 stremio
+teamspeak
 ttf-victor-mono
 visual-studio-code-bin
-waybar-git
+wallust

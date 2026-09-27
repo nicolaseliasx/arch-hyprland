@@ -2,7 +2,7 @@
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-p": "project_symbols::Toggle",
+      "ctrl-p": "file_finder::Toggle",
       "ctrl-g": "git_panel::ToggleFocus"
     }
   }

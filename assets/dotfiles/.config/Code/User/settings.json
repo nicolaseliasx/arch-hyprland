@@ -35,8 +35,6 @@
     "editor.formatOnPaste": true,
   },
   "workbench.iconTheme": "a-file-icon-vscode",
-  "gitlens.ai.model": "vscode",
-  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "chat.viewSessions.orientation": "stacked",
 }

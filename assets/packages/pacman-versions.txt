@@ -14,7 +14,10 @@ brightnessctl
 btop
 cava
 chntpw
+chromium
+clang
 cliphist
+cloudflared
 dbeaver
 ddcutil
 discord
@@ -26,6 +29,7 @@ earlyoom
 efibootmgr
 ethtool
 fastfetch
+fastpotify-bin
 ffmpegthumbnailer
 firefox
 foliate
@@ -51,6 +55,7 @@ inxi
 jq
 kitty
 kvantum
+less
 libnewt
 libpulse
 libspng
@@ -101,17 +106,18 @@ qt6-5compat
 qt6ct
 quickshell
 rofi
+rsync
 sassc
 sbctl
 slack-desktop-wayland
 slurp
 sof-firmware
-spotify
 stremio
 swappy
 swaync
 syncthing
 tailscale
+teamspeak
 texlive-binextra
 texlive-fontsrecommended
 texlive-langportuguese
@@ -139,7 +145,7 @@ uwsm
 vala
 visual-studio-code-bin
 wallust
-waybar-git
+waybar
 wf-recorder
 wget
 wireplumber
@@ -151,7 +157,6 @@ yad
 yarn
 yay-bin
 yt-dlp
-zed
 zip
 zoxide
 zram-generator

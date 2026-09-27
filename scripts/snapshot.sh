@@ -55,6 +55,7 @@ copy_config() {
     '--exclude=**/*.key'
     '--exclude=**/.env'
     '--exclude=**/.env.*'
+    '--exclude=**/*.env'
     '--exclude=**/*token*'
     '--exclude=**/*Token*'
     '--exclude=**/*secret*'
@@ -114,7 +115,7 @@ copy_config() {
     find "$destination" -type d \( -name '.cache' -o -name '.local' -o -name 'Cache' -o -name 'GPUCache' -o -name 'Code Cache' -o -name 'workspaceStorage' -o -name 'Local Storage' -o -name 'IndexedDB' -o -name 'Service Worker' -o -name 'Session Storage' -o -name 'google-chrome' -o -name 'google-chrome-for-testing' -o -name 'chromium' -o -name 'BraveSoftware' -o -name 'Mozilla' -o -name 'mozilla' -o -name 'Slack' -o -name 'discord' -o -name 'Code' -o -name 'JetBrains' -o -name 'pulse' -o -name 'gh' -o -name 'gcloud' -o -name 'rclone' -o -name 'aws' -o -name 'azure' -o -name 'op' -o -name 'codex' -o -name 'Codex' -o -name 'codex-mobile' -o -name 'configstore' -o -name 'anytype' -o -name 'obsidian' \) -prune -exec rm -rf -- {} +
     rm -rf -- "$destination/JetBrains" "$destination/Code" "$destination/pulse" "$destination/opencode/node_modules" "$destination/anytype" "$destination/obsidian" "$destination/Codex" "$destination/hypr/wallpaper_effects" "$destination/configstore"
     rm -f -- "$destination/hypr/.initial_startup_done"
-    find "$destination" -type f \( -name '*.log' -o -name '*.sqlite' -o -name '*.sqlite-*' -o -name '*.db' -o -name '*.pem' -o -name '*.key' -o -name '*.env' -o -name '.env.*' -o -name 'Cookies*' -o -iname '*token*' -o -iname '*secret*' -o -iname '*password*' -o -iname '*accounts*' \) -delete
+    find "$destination" -type f \( -name '*.log' -o -name '*.sqlite' -o -name '*.sqlite-*' -o -name '*.db' -o -name '*.pem' -o -name '*.key' -o -name '*.env' -o -name '.env.*' -o -name '*.env' -o -name 'Cookies*' -o -iname '*token*' -o -iname '*secret*' -o -iname '*password*' -o -iname '*accounts*' \) -delete
     find "$destination" -type l \( -lname '/*' -o -lname '*..*' \) -delete
     rm -f -- "$destination/systemd/user/arch-hyprland-snapshot.service" "$destination/systemd/user/arch-hyprland-snapshot.timer" "$destination/systemd/user/timers.target.wants/arch-hyprland-snapshot.timer"
   fi
@@ -265,11 +266,16 @@ validate_stage() {
   local oversized
   oversized="$(find "$STAGE_DIR/dotfiles" -type f -size +95M -print -quit)"
   [[ -z "$oversized" ]] || die "snapshot validation failed: file exceeds GitHub's practical size limit: $oversized"
+  local credential_pattern='(sk-(proj-)?[A-Za-z0-9_-]{20,}|github_pat_[A-Za-z0-9_]{20,}|ghp_[A-Za-z0-9]{20,}|api[_-]?key[[:space:]]*[:=]|[0-9]{8,10}:[A-Za-z0-9_-]{35})'
+  local sensitive_paths
   if command -v rg >/dev/null 2>&1; then
-    local sensitive_paths
-    sensitive_paths="$(rg -l -i --pcre2 '(sk-(?:proj-)?[A-Za-z0-9_-]{20,}|github_pat_[A-Za-z0-9_]{20,}|ghp_[A-Za-z0-9]{20,}|api[_-]?key[[:space:]]*[:=])' "$STAGE_DIR/dotfiles" 2>/dev/null || true)"
-    [[ -z "$sensitive_paths" ]] || die "snapshot validation failed: possible credential found in $sensitive_paths"
+    sensitive_paths="$(rg -l -i "$credential_pattern" "$STAGE_DIR/dotfiles" 2>/dev/null || true)"
+  elif command -v grep >/dev/null 2>&1; then
+    sensitive_paths="$(grep -rEl "$credential_pattern" "$STAGE_DIR/dotfiles" 2>/dev/null || true)"
+  else
+    die 'snapshot validation failed: no text search tool (rg or grep) available'
   fi
+  [[ -z "$sensitive_paths" ]] || die "snapshot validation failed: possible credential found in $sensitive_paths"
 }
 
 replace_snapshot_artifact() {

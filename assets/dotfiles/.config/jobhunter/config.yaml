@@ -4,15 +4,14 @@ profile_dir: $HOME/projects/job-hunter/profile
 mode: review
 auto_enabled: false
 auto_adapter_allowlist:
-  - greenhouse@14
+  - linkedin@2
 submission:
   mode: manual
   daily_limit: 5
   minimum_manual_score: 70
   minimum_auto_score: 85
   adapter_allowlist:
-    - greenhouse@14
-    - lever@3
+    - linkedin@2
   daily_ats_limit: 5
   daily_company_limit: 1
   cooldown_seconds: 1800
@@ -26,43 +25,21 @@ preparation_limit: 20
 ai_daily_budget_micros: 1000000
 evidence_retention_days: 90
 
-scheduled_career_sources:
-  - index_url: https://confitec.gupy.io
-    allowed_hosts: [confitec.gupy.io]
-    allowed_path_prefixes: [/]
-  - index_url: https://deliverit.gupy.io
-    allowed_hosts: [deliverit.gupy.io]
-    allowed_path_prefixes: [/]
-  - index_url: https://gruposysmap.gupy.io
-    allowed_hosts: [gruposysmap.gupy.io]
-    allowed_path_prefixes: [/]
-  - index_url: https://jointecnologia.gupy.io
-    allowed_hosts: [jointecnologia.gupy.io]
-    allowed_path_prefixes: [/]
-  - index_url: https://softdesign.gupy.io
-    allowed_hosts: [softdesign.gupy.io]
-    allowed_path_prefixes: [/]
-  - index_url: https://verity.gupy.io
-    allowed_hosts: [verity.gupy.io]
-    allowed_path_prefixes: [/]
-  - index_url: https://job-boards.greenhouse.io/blip-global
-    allowed_hosts: [job-boards.greenhouse.io]
-    allowed_path_prefixes: [/blip-global]
-  - index_url: https://job-boards.greenhouse.io/nerdy
-    allowed_hosts: [job-boards.greenhouse.io]
-    allowed_path_prefixes: [/nerdy]
-  - index_url: https://job-boards.greenhouse.io/rdsourcing
-    allowed_hosts: [job-boards.greenhouse.io]
-    allowed_path_prefixes: [/rdsourcing]
-  - index_url: https://job-boards.greenhouse.io/teachablecareers
-    allowed_hosts: [job-boards.greenhouse.io]
-    allowed_path_prefixes: [/teachablecareers]
-  - index_url: https://job-boards.greenhouse.io/telnyx54
-    allowed_hosts: [job-boards.greenhouse.io]
-    allowed_path_prefixes: [/telnyx54]
-  - index_url: https://job-boards.greenhouse.io/vettoai
-    allowed_hosts: [job-boards.greenhouse.io]
-    allowed_path_prefixes: [/vettoai]
+linkedin:
+  hunter:
+    enabled: true
+    search_terms:
+      - engenheiro de software backend
+      - desenvolvedor back end sênior
+      - python developer remote
+    location: Brazil
+    easy_apply_only: true
+    max_pages: 3
+    jobs_per_run: 3
+  applier:
+    daily_limit: 8
+    min_score: 80
+    step_delay_ms: [800, 2500]
 
 dashboard:
   lan_enabled: true

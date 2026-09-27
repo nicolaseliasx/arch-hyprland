@@ -2,6 +2,6 @@
 Type=Application
 Name=Codex Remote Control
 Comment=Start Codex Remote Control after login
-Exec=$HOME/codex-remote-control-start
+Exec=$HOME/utils/codex-remote-control-start
 Terminal=false
 X-GNOME-Autostart-enabled=true

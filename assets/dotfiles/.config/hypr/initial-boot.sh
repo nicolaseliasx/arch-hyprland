@@ -8,16 +8,27 @@
 # However, I do highly suggest not to touch it since again, as long as the marker exist, script wont run
 
 # Variables
-waybar_style="$HOME/.config/waybar/style/[Dark] Wallust Obsidian Edge.css"
+scriptsDir=$HOME/.config/hypr/scripts
+wallpaper=$HOME/.config/hypr/wallpaper_effects/.wallpaper_current
+waybar_style="$HOME/.config/waybar/style/[Extra] Neon Circuit.css"
 kvantum_theme="ncls-black-waybar"
 color_scheme="prefer-dark"
 gtk_theme="NCLS-Black-Waybar"
 icon_theme="breeze-dark"
 cursor_theme="Adwaita"
 
+swww="swww img"
+effect="--transition-bezier .43,1.19,1,.4 --transition-fps 30 --transition-type grow --transition-pos 0.925,0.977 --transition-duration 2"
+
 # Check if a marker file exists.
 if [ ! -f "$HOME/.config/hypr/.initial_startup_done" ]; then
     sleep 1
+    # Initialize wallust and wallpaper
+	if [ -f "$wallpaper" ]; then
+		wallust run -s $wallpaper > /dev/null 
+		swww query || swww-daemon && $swww $wallpaper $effect
+	    "$scriptsDir/WallustSwww.sh" > /dev/null 2>&1 & 
+	fi
      
     # initiate GTK dark mode and apply icon and cursor theme
     gsettings set org.gnome.desktop.interface color-scheme $color_scheme > /dev/null 2>&1 &
@@ -38,11 +49,11 @@ if [ ! -f "$HOME/.config/hypr/.initial_startup_done" ]; then
     # initiate kvantum theme
     kvantummanager --set "$kvantum_theme" > /dev/null 2>&1 &
 
-	# Ensure the selected Waybar style exists even if the profile was copied by
-	# a tool that does not preserve symlinks.
-	if [ -f "$waybar_style" ]; then
-		ln -sfn "$waybar_style" "$HOME/.config/waybar/style.css"
-	fi
+	# waybar style
+	#if [ -L "$HOME/.config/waybar/config" ]; then
+    ##    	ln -sf "$waybar_style" "$HOME/.config/waybar/style.css"
+    #   	"$scriptsDir/Refresh.sh" > /dev/null 2>&1 & 
+	#fi
 
 
     # Create a marker file to indicate that the script has been executed.

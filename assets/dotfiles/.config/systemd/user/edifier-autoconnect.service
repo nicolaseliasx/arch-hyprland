@@ -1,0 +1,10 @@
+[Unit]
+Description=Connect paired EDIFIER MP85 at graphical login
+After=pipewire.service wireplumber.service
+PartOf=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=$HOME/.local/bin/edifier-autoconnect
+TimeoutStartSec=65s
+Restart=no

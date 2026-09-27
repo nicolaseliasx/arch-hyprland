@@ -85,6 +85,17 @@ def hyprctl(*args: str, hypr_dir: Path | None = None) -> subprocess.CompletedPro
     )
 
 
+def hypr_eval(lua: str, hypr_dir: Path | None = None) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        ["hyprctl", "eval", lua],
+        check=False,
+        env=hypr_env(hypr_dir),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+
+
 def hyprctl_json(*args: str, hypr_dir: Path | None = None) -> object | None:
     result = subprocess.run(
         ["hyprctl", "-j", *args],
@@ -149,7 +160,20 @@ def active_split_direction(hypr_dir: Path | None = None) -> str:
 
     try:
         window_center_y = float(window_at[1]) + (float(window_size[1]) / 2)
-        monitor_midpoint_y = float(monitor.get("y", 0)) + (float(monitor.get("height", 0)) / 2)
+    except (TypeError, ValueError):
+        return SPLIT_BELOW
+
+    try:
+        transform = int(monitor.get("transform") or 0)
+    except (TypeError, ValueError):
+        transform = 0
+
+    monitor_height = monitor.get("height", 0)
+    if transform in (1, 3):
+        monitor_height = monitor.get("width", 0)
+
+    try:
+        monitor_midpoint_y = float(monitor.get("y", 0)) + (float(monitor_height) / 2)
     except (TypeError, ValueError):
         return SPLIT_BELOW
 
@@ -168,10 +192,8 @@ class ColumnMode:
             return
 
         value = "true" if enable else "false"
-        result = hyprctl(
-            "keyword",
-            "dwindle:permanent_direction_override",
-            value,
+        result = hypr_eval(
+            f"hl.config({{ dwindle = {{ permanent_direction_override = {value} }} }})",
             hypr_dir=hypr_dir,
         )
         if result.returncode == 0:
@@ -196,10 +218,8 @@ class ColumnMode:
 
         if force_preselect or self.enabled:
             direction = active_split_direction(hypr_dir)
-            result = hyprctl(
-                "dispatch",
-                "layoutmsg",
-                f"preselect {direction}",
+            result = hypr_eval(
+                f'hl.dsp.layout("preselect {direction}")',
                 hypr_dir=hypr_dir,
             )
             if result.returncode != 0:

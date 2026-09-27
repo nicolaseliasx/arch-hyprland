@@ -1,5 +1,4 @@
 local colors = require("wallust.colors")
-local home = assert(os.getenv("HOME"), "HOME is not set")
 
 hl.config({
   dwindle = {
@@ -129,7 +128,7 @@ hl.config({
 
 hl.config({
   decoration = {
-      screen_shader = home .. "/.config/hypr/shaders/digital-vibrance-90.frag",
+      screen_shader = "$HOME/.config/hypr/shaders/digital-vibrance-90.frag",
       rounding = 8,
       active_opacity = 1.0,
       inactive_opacity = 0.9,
